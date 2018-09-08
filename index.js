@@ -10,7 +10,7 @@ const state = {
   
   const actions = {
     location: location.actions,
-    login: state => {
+    login: () => (state, actions) => {
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider).then(function(result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
@@ -35,11 +35,11 @@ const state = {
     setUser: value => state => {{ user: value }}
 
   }
-  const LandingView =  Landing(state)
-  const AuthedView = () => <h2>Authed</h2>
+  const LandingView =  Landing(state, actions)
+  const AuthedView = (state, actions) => (props, children) => <h2>Authed</h2>
 
 
-  const view = state => (
+  const view = (state, actions) => (
     <div>
       <ul>
         <li>
@@ -52,8 +52,8 @@ const state = {
   
       <hr />
   
-      <Route path="/" render={LandingView} />
-      <Route path="/about" render={AuthedView} />
+      <Route path="/" render={Landing(state, actions)} />
+    <Route path="/about" render={AuthedView(state, actions)} />
     </div>
   )
 
