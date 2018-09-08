@@ -16,5 +16,8 @@
     "firebase": "^5.4.2",
     "hyperapp": "^1.2.9",
     "parcel-bundler": "^1.9.7"
+  },
+  "devDependencies": {
+    "@babel/preset-es2017": "^7.0.0-beta.53"
   }
 }
