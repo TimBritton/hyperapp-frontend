@@ -17,8 +17,9 @@ const state = {
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
-
+            console.log(state)
             actions.setUser(user)
+            console.log(state)
             
             // ...
           }).catch(function(error) {
@@ -32,7 +33,9 @@ const state = {
             // ...
           });
     },
-    setUser: value => state => {{ user: value }}
+    setUser: value => state => {
+        return { user: value }
+    }
 
   }
   const LandingView =  Landing(state, actions)
@@ -51,6 +54,11 @@ const state = {
       </ul>
   
       <hr />
+
+      <p>
+           STATE: <pre>{JSON.stringify(state)}</pre>
+       </p>
+       <hr />
   
       <Route path="/" render={Landing(state, actions)} />
     <Route path="/about" render={AuthedView(state, actions)} />
